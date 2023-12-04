@@ -1,0 +1,16 @@
+var DbConfig={
+    host:'localhost',
+    user:'root',
+    password:''
+}
+
+var con=mysql.createConnection(DbConfig);
+
+con.connect(function(err){
+    if(err){
+        console.log("Database not connected!")
+    }
+    else{
+        console.log("Database connected!")
+    }
+});

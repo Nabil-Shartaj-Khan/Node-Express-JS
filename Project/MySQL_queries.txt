@@ -1,0 +1,76 @@
+//inserting data-
+
+
+function insertData(con){
+
+    let query= "INSERT INTO `students_list`(`name`, `department`, `phone_no`, `city`, `gender`) VALUES ('Nabil Shartaj Khan','CSE','01770438440','Dhaka','Male')"
+    con.query(query,function(err){
+        
+        if(err){
+            console.log("Error inserting data")
+        }
+        else{
+            console.log("Data inserted! Check database.")
+        }
+    })
+
+
+}
+
+
+//deleting data
+
+function deleteData(con){
+
+    let query= "DELETE FROM `students_list` WHERE `id`='1'";
+    con.query(query,function(err){
+        
+        if(err){
+            console.log("Error deleting data")
+        }
+        else{
+            console.log("Data deleted! Check database.")
+        }
+    })
+
+
+}
+
+
+//updating data
+
+function updateData(con){
+
+    let query= "UPDATE `students_list` SET `name`='Messi',`department`='Sports',`phone_no`='+7154715582',`city`='Buenos Aires',`gender`='male'  WHERE `id`='3'";
+    con.query(query,function(err){
+        
+        if(err){
+            console.log("Error updating data")
+        }
+        else{
+            console.log("Data updated! Check database.")
+        }
+    })
+
+
+}
+
+//selecting data
+
+
+
+function updateData(con){
+
+    let query= "SELECT * FROM `students_list` where `id`='1'";
+    con.query(query,function(err,result){
+        
+        if(err){
+            console.log("Error selecting data")
+        }
+        else{
+            console.log(result)
+        }
+    })
+
+
+}

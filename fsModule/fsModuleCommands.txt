@@ -1,0 +1,123 @@
+
+*//asynchronous readfile*
+
+
+     fs.readFile('Home.html',function(error,data) {
+
+         res.writeHead(200,{'Content-type':'text/html'});
+         res.write(data);
+         res.end();
+
+     });
+
+*//synchronous readfile*
+
+     let myData=fs.readFileSync('Home.html');
+     res.writeHead(200,{'Content-type':'text/html'});
+     res.write(data);
+     res.end();
+
+
+*//asynchronous write file*
+
+   fs.writeFile('asyncwrite.txt', "This file was created by file writing asynchronous method", function(error) {
+
+            if (error) {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("File writing was not possible");
+                res.end();
+            } else {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("Successfully wrote file!");
+                res.end();
+            }
+        });
+
+*//synchronous write file*
+
+
+    let syncMessage=fs.writeFileSync('syncwrite.txt', "This file was created by file writing synchronous method");
+
+            if (syncMessage) {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("File writing was not possible");
+                res.end();
+            } else {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("Successfully wrote file! Please check source folder!");
+                res.end();
+            }
+
+
+*//asynchronous renaming file*
+
+        fs.rename('asyncwrite.txt','Async_Method_File_Write.txt',function(error){
+
+                
+            if (error) {
+                
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("File rename was not possible! See if its already renamed or check code!");
+                res.end();
+            } else {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("Successfully renamed file! Check source folder!");
+                res.end();
+            }
+                
+            }
+        })
+
+
+*//synchronous renaming file*
+
+        let syncRename=fs.renameSync('syncwrite.txt','Sync_Method_File_Write.txt');
+
+                
+            if (syncRename) {
+
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("File rename was not possible! See if its already renamed or check code!");
+                res.end();
+            } else {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("Successfully renamed file! Check source folder!");
+                res.end();
+            }
+
+*//asynchronous file deletion*
+
+
+  fs.unlink('YouCantSeeMe.txt', function(error) {
+            if (error) {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("File deletion was not possible! See if it's already renamed or check code!");
+                res.end();
+            } else {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("Successfully deleted file! Check source folder!");
+                res.end();
+            }
+        }); 
+
+*//synchronous file deletion*
+
+let result=fs.unlink('YouCantSeeMe.txt');
+ 
+            if (error) {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("File deletion was not possible! See if it's already renamed or check code!");
+                res.end();
+            } else {
+                res.writeHead(200, { 'Content-type': 'text/html' });
+                res.write("Successfully deleted file! Check source folder!");
+                res.end();
+
+            };
+
+
+
+
+
+Note: use this after requesting for URL.
+
