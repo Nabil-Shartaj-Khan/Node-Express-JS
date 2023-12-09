@@ -11,8 +11,22 @@ app.use(bodyParser.json());
 // app.use(multer.array);
 // app.use(express.static('public'));
 
-//get request
-app.get("/",function(req,res){
+
+//application middleware for every request
+
+app.use(function(req,res,next){
+
+    console.log("I am always coming in console log");
+    next();
+})
+
+
+//get request anr route specific middleware
+app.use("/home",function(req,res,next){
+    console.log("I am always running in Homepage log only!")
+    next();
+})
+app.get("/home",function(req,res){
     res.send("Homepage");
 })
 
@@ -37,6 +51,7 @@ app.get("/header",function(req,res){
 
 
 //intro to post, use postman to examine post requests
+
 
 app.post("/post",function(req,res){
     res.send("Homepage");
@@ -105,8 +120,7 @@ app.post("/upload", function (req, res) {
 
 
 
+
 app.listen(9000,function(){
     console.log("Server is running!")
 })
-
-
