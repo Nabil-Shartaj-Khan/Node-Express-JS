@@ -15,28 +15,17 @@ app.get('/',function(req,res){
 })
 
 
-
-
-
-
-
-
-
 //checking socket connection 
 io.on('connection',function(socket){
     console.log("A new user is connected!")
 
-    //sending data to client
-    // setTimeout(function(){
-    //     socket.send("Data is send from server.")
-    // },5000)
-    
-    //continuous data transmission
-    setInterval(function(){
-        let time=new Date().getTime();
-        socket.send(time) 
-    },500)
 
+
+    //custom event
+    socket.on('myName',function(msg){
+        console.log(msg)
+
+    })
     socket.on('disconnect',function(){
         console.log("User is disconnected!")
     })
