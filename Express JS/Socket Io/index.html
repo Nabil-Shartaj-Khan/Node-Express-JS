@@ -18,6 +18,10 @@
       You will see the time from server here! (commented out!)
     </p>
 
+    <h3 id="message_show">
+      Broadcasted message from server will be shown here!
+    </h3>
+
     <label>Input your name and check the console log on the server side</label
     ><br />
     <input type="text" placeholder="Enter your name" id="name" />
@@ -32,12 +36,11 @@
     <!-- integrating socket.io in client side -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let socket = io();
-
-      function sendData() {
-        name = document.getElementById("name").value;
-        socket.emit("myName", name); //custom event
-      }
+      let socket = io("/second");
+      //name spacing
+      socket.on("myEvent", function (data) {
+        document.getElementById("message_show").innerHTML = data;
+      });
     </script>
   </body>
 </html>

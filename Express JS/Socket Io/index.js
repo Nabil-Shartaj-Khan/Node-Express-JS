@@ -1,36 +1,35 @@
-const express=require('express');
-const http=require('http');
-const {Server}=require('socket.io'); //importing socket io
-app=express();
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io'); // Importing socket.io
 
-const expressServer=http.createServer(app);
-const io=new Server(expressServer); //socket io server
+const app = express();
+const expressServer = http.createServer(app);
+const io = new Server(expressServer); // Socket.io server
 
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html'); // __dirname = default directory
+});
 
+// Name spacing first
+let firstSpace = io.of("/first");
+// Checking socket connection
+firstSpace.on('connection', function (socket) {
+  firstSpace.emit('myEvent', "Hello from first!");
+});
 
-app.get('/',function(req,res){
+// Name spacing second
+let secondSpace = io.of("/second");
 
-    res.sendFile(__dirname+"/index.html"); //__dirname=default directory
-        
-})
+// Checking socket connection
+secondSpace.on('connection', function (socket) {
+  secondSpace.emit('myEvent', "Hello from second!");
+  
+  socket.on('disconnect', function () {
+    console.log('User is disconnected!');
+  });
+});
 
-
-//checking socket connection 
-io.on('connection',function(socket){
-    console.log("A new user is connected!")
-
-
-
-    //custom event
-    socket.on('myName',function(msg){
-        console.log(msg)
-
-    })
-    socket.on('disconnect',function(){
-        console.log("User is disconnected!")
-    })
-})
-//port selection
-expressServer.listen(3000,function(){
-    console.log("Server is running! PORT:3000")
-})
+// Port selection
+expressServer.listen(3000, function () {
+  console.log('Server is running! PORT:3000');
+});

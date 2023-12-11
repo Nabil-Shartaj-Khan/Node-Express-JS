@@ -13,6 +13,10 @@
         document.getElementById("time").innerHTML = msg; //used to custom event data transmission
         socket.send(name); //normal event
     })
+          //receiving broadcast message from server side
+          socket.on("MyBroadcast", function (data) {
+            document.getElementById("message_show").innerHTML = data;
+          });
 
 
 
@@ -39,3 +43,20 @@
         console.log(msg)     
 
      })
+
+     function sendData() {
+        name = document.getElementById("name").value;
+       socket.emit("myName", name); //custom event
+      }
+
+          //custom event receiving from client side
+     socket.on('myName',function(msg){
+        console.log(msg)}
+
+
+          // Broadcasting from server to client
+  io.sockets.emit('MyBroadcast', 'This message will be sent to all users!');
+  
+
+    
+
