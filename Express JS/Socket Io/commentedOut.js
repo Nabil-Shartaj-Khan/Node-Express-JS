@@ -18,6 +18,10 @@
             document.getElementById("message_show").innerHTML = data;
           });
 
+                //name spacing
+      socket.on("myEvent", function (data) {
+        document.getElementById("message_show").innerHTML = data;
+      });
 
 
     // all the codes that are commented out from index.js
@@ -56,6 +60,26 @@
 
           // Broadcasting from server to client
   io.sockets.emit('MyBroadcast', 'This message will be sent to all users!');
+
+
+  // Name spacing first
+let firstSpace = io.of("/first");
+// Checking socket connection
+firstSpace.on('connection', function (socket) {
+  firstSpace.emit('myEvent', "Hello from first!");
+});
+
+// Name spacing second
+let secondSpace = io.of("/second");
+
+// Checking socket connection
+secondSpace.on('connection', function (socket) {
+  secondSpace.emit('myEvent', "Hello from second!");
+  
+  socket.on('disconnect', function () {
+    console.log('User is disconnected!');
+  });
+});
   
 
     

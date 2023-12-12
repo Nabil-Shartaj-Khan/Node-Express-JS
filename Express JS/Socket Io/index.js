@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const { connect } = require('http2');
 const { Server } = require('socket.io'); // Importing socket.io
 
 const app = express();
@@ -10,24 +11,21 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html'); // __dirname = default directory
 });
 
-// Name spacing first
-let firstSpace = io.of("/first");
-// Checking socket connection
-firstSpace.on('connection', function (socket) {
-  firstSpace.emit('myEvent', "Hello from first!");
-});
 
-// Name spacing second
-let secondSpace = io.of("/second");
+io.on('connection',function(socket){
 
-// Checking socket connection
-secondSpace.on('connection', function (socket) {
-  secondSpace.emit('myEvent', "Hello from second!");
+  //adding rooms and event
+
+  socket.join("my-room");
+  let myRoomMembers=io.sockets.adapter.rooms.get('my-room').size;
+
+  io.sockets.in('my-room').emit('coding','Nabil is coding= '+myRoomMembers)
+
+  socket.join("bed-room");
+  io.sockets.in('bed-room').emit('sleeping','Nabil is sleeping= '+myRoomMembers)
   
-  socket.on('disconnect', function () {
-    console.log('User is disconnected!');
-  });
-});
+
+})
 
 // Port selection
 expressServer.listen(3000, function () {
