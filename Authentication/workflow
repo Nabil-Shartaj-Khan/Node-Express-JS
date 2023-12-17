@@ -1,0 +1,23 @@
+**For register-**
+
+1. creating server
+2. defining routes by creating routes folder.
+3. create userController to define functionalities and put that in routes.
+4. create mongodb server in config/db.js.
+5. for mongodb credentials env file and dot env initialization.
+6. Attaching mongo db in main index.js for database connection.
+7. Designing a schema for interacting with the mongodb collection/table or what to save in database.
+8. To validate request body created middleware function in extras.
+9. Add function to route.
+10. Create usermodel based on mongoose user model to pass request body, encrypt the password and add data in database by the userController.
+
+**For login-**
+
+11. Add loginValidate in extras/userValidate.js
+12. Check for given credentials and match it with database in userController.js
+13. Generate JWT token for the user.
+
+**After logging in-**
+
+14. Ensure authorization header by verifying first in extras/auth.js.
+15. Show all the users in the database.
